@@ -18,10 +18,9 @@ Use powers of 2 in **scale** and **image size** to get tilable texture
 
 1. Download the add-on
 2. Just drag'n'drop the downloaded `.zip` into blender
-   OR
-4. Open Blender and go to `Edit > Preferences > Add-ons`. 
-5. Click `Install...` and select the downloaded `.zip` file.
-6. Enable the add-on by checking the box next to its name.
+2. Open Blender and go to `Edit > Preferences > Add-ons`. 
+3. Click `Install...` and select the downloaded `.zip` file.
+4. Enable the add-on by checking the box next to its name.
 
 ## Usage
 
@@ -85,6 +84,7 @@ For questions or feedback, please open an issue on the repository or contact the
 
 ## Changelog
 
+- **v1.9**: Added a brand Worley noise generation module
 - **v1.8.2**: now each generated image stores its parameters, iterating became easier. "display as 1x1" checkbox is now realtime
 - **v1.6.1**: fixed Aspect ratio equalizer
 - **v1.6**: Generator works 20x faster. `Add to Active Shader` dont ignores frames and group
