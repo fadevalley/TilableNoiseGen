@@ -21,10 +21,10 @@ When using Voronoi noise, you can use integers for **scaling** to achieve a tile
 ## Installation
 
 1. Download the add-on
-2.0. Just drag'n'drop the downloaded `.zip` into blender
-2. Open Blender and go to `Edit > Preferences > Add-ons`. 
-3. Click `Install...` and select the downloaded `.zip` file.
-4. Enable the add-on by checking the box next to its name.
+2. Just drag'n'drop the downloaded `.zip` into blender
+3. Open Blender and go to `Edit > Preferences > Add-ons`. 
+4. Click `Install...` and select the downloaded `.zip` file.
+5. Enable the add-on by checking the box next to its name.
 
 ## Usage
 
