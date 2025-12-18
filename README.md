@@ -1,23 +1,27 @@
-This Blender add-on generates procedural Perlin noise and turbulence textures, which can be used for creating materials, textures, or other visual effects. The generated textures can be directly applied to the active material or saved as images.
+This Blender add-on generates procedural Perlin noise, turbulence, and Voronoi noise textures, which can be used for creating materials, textures, or other visual effects. The generated textures can be directly applied to the active material or saved as images.
 
 # Important
-Use powers of 2 in **scale** and **image size** to get tilable  texture
-
+When using Perlin noise, Use powers of 2 in **scale** and **image size** to get tilable texture
 2 4 8 16 32 64 128 256 512 1024 2048 4096 8192 16384
+
+When using Voronoi noise, you can use integers for **scaling** to achieve a tileable texture.
+
+
 
 ## Features
 
 - **Perlin Noise Generation**: Create seamless Perlin noise textures with customizable dimensions, scale, and seed.
 - **Turbulence Noise**: Generate multi-layered turbulence noise with adjustable depth, attenuation, and color options.
+- **Voronoi Noise Generation**: Create cell-based Voronoi noise textures with various distance calculation methods.
 - **Aspect Ratio Correction**: Automatically adjust the display aspect ratio for non-square textures.
 - **Overwrite Existing Images**: Option to replace existing images with the same name.
 - **Shader Integration**: Easily connect generated textures to the active material's shader nodes.
-- **Customizable Parameters**: Control noise properties such as scale, depth, attenuation, color, alpha, and absolute values.
+- **Customizable Parameters**: Control noise properties such as scale, depth, attenuation, color, alpha, and absolute values for Perlin noise, and frequency, return type, smoothness, and randomness for Voronoi noise.
 
 ## Installation
 
 1. Download the add-on
-2. Just drag'n'drop the downloaded `.zip` into blender
+2.0. Just drag'n'drop the downloaded `.zip` into blender
 2. Open Blender and go to `Edit > Preferences > Add-ons`. 
 3. Click `Install...` and select the downloaded `.zip` file.
 4. Enable the add-on by checking the box next to its name.
@@ -28,7 +32,12 @@ Use powers of 2 in **scale** and **image size** to get tilable  texture
 
 1. Open the `Image Editor` in Blender.
 2. Navigate to the `Noise Tools` panel in the sidebar (press `N` to open the sidebar if it's not visible).
-3. Configure the noise settings:
+3. Select the noise type from the dropdown menu:
+   - **Perlin**: Generate Perlin noise textures
+   - **Voronoi**: Generate cell-based Voronoi noise textures
+4. Configure the noise settings based on the selected type:
+
+#### Perlin Noise Settings:
    - **Image Name**: Name of the generated image.
    - **Overwrite Existing**: Replace an existing image with the same name.
    - **Width/Height**: Dimensions of the generated texture.
@@ -41,7 +50,26 @@ Use powers of 2 in **scale** and **image size** to get tilable  texture
    - **RGB**: Generate separate noise for each color channel.
    - **Alpha**: Generate an alpha channel for the texture.
    - **Groovy**: Use absolute values for higher contrast.
-4. Click the `Generate Noise` button to create the texture.
+
+#### Voronoi Noise Settings:
+   - **Image Name**: Name of the generated image.
+   - **Overwrite Existing**: Replace an existing image with the same name.
+   - **Width/Height**: Dimensions of the generated texture.
+   - **Correct Aspect Ratio**: Adjust the display aspect ratio for non-square textures.
+   - **Seed**: Random seed for noise generation.
+   - **Frequency**: Number of cells per unit (controls cell size).
+   - **Return Type**: Type of noise value to return:
+     - **Euclidean Distance**: Distance to the closest point using Euclidean distance
+     - **Minkowski Distance**: Distance to the closest point using Minkowski distance with adjustable exponent
+     - **Cell Pattern (Euclidean)**: Difference between closest and second closest point using Euclidean distance
+     - **Cell Pattern (Minkowski)**: Difference between closest and second closest point using Minkowski distance with adjustable exponent
+   - **Minkowski p**: Exponent for Minkowski distance calculation (only visible when using Minkowski distance types)
+   - **Smoothness**: Smoothing applied to the noise (higher = more blur)
+   - **Randomness**: Randomness of cell center positions (0 = grid, 1 = fully random)
+   - **RGB**: Generate separate noise for each color channel.
+   - **Alpha**: Generate an alpha channel for the texture.
+
+5. Click the `Generate Noise` button to create the texture.
 
 ![image](https://github.com/user-attachments/assets/7676f5fc-9d64-4566-88e9-0c69796be543)
 
@@ -59,7 +87,11 @@ Use powers of 2 in **scale** and **image size** to get tilable  texture
 - **Width/Height**: Dimensions of the generated texture.
 - **Correct Aspect Ratio**: Adjust the display aspect ratio for non-square textures.
 
-### Noise Settings
+### Noise Type
+- **Perlin**: Generate Perlin noise textures
+- **Voronoi**: Generate cell-based Voronoi noise textures
+
+### Perlin Noise Settings
 - **Seed**: Random seed for noise generation.
 - **Scale**: Scale of the noise pattern.
 - **Use Depth**: Enable turbulence noise with multiple layers.
@@ -68,6 +100,20 @@ Use powers of 2 in **scale** and **image size** to get tilable  texture
 - **RGB**: Generate separate noise for each color channel.
 - **Alpha**: Generate an alpha channel for the texture.
 - **Groovy**: Use absolute values for higher contrast.
+
+### Voronoi Noise Settings
+- **Seed**: Random seed for noise generation.
+- **Frequency**: Number of cells per unit (controls cell size).
+- **Return Type**: Type of noise value to return:
+  - **Euclidean Distance**: Distance to the closest point using Euclidean distance
+  - **Minkowski Distance**: Distance to the closest point using Minkowski distance with adjustable exponent
+  - **Cell Pattern (Euclidean)**: Difference between closest and second closest point using Euclidean distance
+  - **Cell Pattern (Minkowski)**: Difference between closest and second closest point using Minkowski distance with adjustable exponent
+- **Minkowski p**: Exponent for Minkowski distance calculation (only visible when using Minkowski distance types, range: 0.1-10.0)
+- **Smoothness**: Smoothing applied to the noise (higher = more blur, range: 0.0-1.0)
+- **Randomness**: Randomness of cell center positions (0 = grid, 1 = fully random, range: 0.0-1.0)
+- **RGB**: Generate separate noise for each color channel.
+- **Alpha**: Generate an alpha channel for the texture.
 
 ## Notes
 
@@ -84,7 +130,12 @@ For questions or feedback, please open an issue on the repository or contact the
 
 ## Changelog
 
-- **v1.9**: Added a brand Voronoi noise generation module
+- **v1.9**: Added Voronoi noise generation with adjustable parameters:
+  - New Noise Type dropdown to select between Perlin and Voronoi noise
+  - For Voronoi noise: added Frequency, Return Type, Smoothness, and Randomness parameters
+  - Return Type options: Euclidean Distance, Minkowski Distance, Cell Pattern (Euclidean), Cell Pattern (Minkowski)
+  - Added adjustable Minkowski distance exponent (p) with range 0.1-10.0
+  - Improved UI with context-sensitive controls
 - **v1.8.2**: now each generated image stores its parameters, iterating became easier. "display as 1x1" checkbox is now realtime
 - **v1.6.1**: fixed Aspect ratio equalizer
 - **v1.6**: Generator works 20x faster. `Add to Active Shader` dont ignores frames and group

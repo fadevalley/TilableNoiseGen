@@ -41,8 +41,8 @@ class NOISE_PT_main_panel(Panel):
             op.use_color = scene.noise_use_color
             op.use_alpha = scene.noise_use_alpha
             op.absolute = scene.noise_absolute
-        else:  # VORONOI
-            op = box.operator("noise.generate_voronoi", text="Generate Noise")
+        else:  # VORONOII
+            op = box.operator("noise.generate_voronoii", text="Generate Noise")
             op.image_name = scene.noise_image_name
             op.overwrite = scene.noise_overwrite
             op.correct_aspect = scene.noise_correct_aspect
@@ -79,7 +79,7 @@ class NOISE_PT_main_panel(Panel):
             col.prop(scene, "noise_depth", text = "Depth details")
             col.prop(scene, "noise_lacunarity", text = "lacunarity")
             col.prop(scene, "noise_atten", text = "Mix details")
-        else:  # VORONOI
+        else:  # VORONOII
             col.prop(scene, "noise_frequency", text="Frequency")
             col.prop(scene, "noise_return_type", text="Return Type")
             # Only show Minkowski exponent when using Minkowski distance

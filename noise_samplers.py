@@ -74,8 +74,8 @@ class PerlinSampler2D:
         sy = self.s_curve(y_frac)
         return self.lerp(self.lerp(v00, v10, sx), self.lerp(v01, v11, sx), sy)
 
-# Voronoi Noise Sampler
-class VoronoiSampler2D:
+# Voronoii Noise Sampler
+class VoronoiiSampler2D:
     def __init__(self, width, height, randseed, randomness=1.0):
         self.width = int(width)
         self.height = int(height)
@@ -111,7 +111,7 @@ class VoronoiSampler2D:
         return np.array(points, dtype=np.float32)
     
     def get_value_vectorized(self, x_coords, y_coords, frequency, return_type=0, return_cell_id=False, smoothness=0.0, minkowski_exponent=3.0):
-        """Fully vectorized Voronoi noise generation with tiling support"""
+        """Fully vectorized Voronoii noise generation with tiling support"""
         # Convert return_type to integer if it's a string (from enum)
         return_type = int(return_type) if isinstance(return_type, str) else return_type
         
