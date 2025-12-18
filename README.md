@@ -1,7 +1,7 @@
 This Blender add-on generates procedural Perlin noise and turbulence textures, which can be used for creating materials, textures, or other visual effects. The generated textures can be directly applied to the active material or saved as images.
 
 # Important
-Use powers of 2 in **scale** and **image size** to get tilable texture
+Use powers of 2 in **scale** and **image size** to get tilable  texture
 
 2 4 8 16 32 64 128 256 512 1024 2048 4096 8192 16384
 
@@ -41,7 +41,7 @@ Use powers of 2 in **scale** and **image size** to get tilable texture
    - **RGB**: Generate separate noise for each color channel.
    - **Alpha**: Generate an alpha channel for the texture.
    - **Groovy**: Use absolute values for higher contrast.
-4. Click the `Generate Perlin Noise` button to create the texture.
+4. Click the `Generate Noise` button to create the texture.
 
 ![image](https://github.com/user-attachments/assets/7676f5fc-9d64-4566-88e9-0c69796be543)
 
@@ -84,7 +84,7 @@ For questions or feedback, please open an issue on the repository or contact the
 
 ## Changelog
 
-- **v1.9**: Added a brand Worley noise generation module
+- **v1.9**: Added a brand Voronoi noise generation module
 - **v1.8.2**: now each generated image stores its parameters, iterating became easier. "display as 1x1" checkbox is now realtime
 - **v1.6.1**: fixed Aspect ratio equalizer
 - **v1.6**: Generator works 20x faster. `Add to Active Shader` dont ignores frames and group

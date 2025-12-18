@@ -76,7 +76,7 @@ class NoiseParamsUpdater:
                                         scene.noise_lacunarity = params["lacunarity"]
                                         scene.noise_atten = params["atten"]
                                 else:
-                                    scene.noise_type = 'WORLEY'
+                                    scene.noise_type = 'VORONOI'
                                     scene.noise_frequency = params["frequency"]
                                     # Only set fbm_iterations if it exists in params (for backward compatibility)
                                     if "fbm_iterations" in params:

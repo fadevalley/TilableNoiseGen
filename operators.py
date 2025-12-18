@@ -1,7 +1,7 @@
 import bpy
 from bpy.types import Operator
 from bpy.props import IntProperty, FloatProperty, BoolProperty, StringProperty, EnumProperty
-from .noise_generators import create_perlin_noise_image, create_turbulence_image, create_worley_noise_image
+from .noise_generators import create_perlin_noise_image, create_turbulence_image, create_voronoi_noise_image
 
 class NOISE_OT_generate_perlin(Operator):
     bl_idname = "noise.generate_perlin"
@@ -116,16 +116,16 @@ class NOISE_OT_generate_perlin(Operator):
         image.colorspace_settings.name = 'Non-Color'
         return {'FINISHED'}
 
-# Operator to Generate Worley Noise
-class NOISE_OT_generate_worley(Operator):
-    bl_idname = "noise.generate_worley"
-    bl_label = "Generate Worley Noise"
+# Operator to Generate Voronoi Noise
+class NOISE_OT_generate_voronoi(Operator):
+    bl_idname = "noise.generate_voronoi"
+    bl_label = "Generate Voronoi Noise"
     bl_options = {'REGISTER', 'UNDO'}
 
     # Operator properties
     image_name: StringProperty(
         name="Image Name",
-        default="WorleyNoise",
+        default="VoronoiNoise",
     )
     overwrite: BoolProperty(
         name="Overwrite Existing",
@@ -148,7 +148,7 @@ class NOISE_OT_generate_worley(Operator):
             ('3', "Cell Pattern (Minkowski)", "Difference between closest and second closest point using Minkowski distance"),
         ],
         default='0',
-        description="Type of distance calculation for Worley noise"
+        description="Type of distance calculation for Voronoi noise"
     )
     minkowski_exponent: FloatProperty(
         name="Minkowski Exponent (p)",
@@ -196,7 +196,7 @@ class NOISE_OT_generate_worley(Operator):
             self.report({'ERROR'}, "Image exists! Check Overwrite")
             return {'CANCELLED'}
         
-        image = create_worley_noise_image(
+        image = create_voronoi_noise_image(
             self.image_name,
             self.width,
             self.height,

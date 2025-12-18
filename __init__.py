@@ -30,13 +30,13 @@ bl_info = {
 import bpy
 from bpy.props import StringProperty, BoolProperty, IntProperty, FloatProperty, EnumProperty
 from .utils import NoiseParamsUpdater, update_display_aspect
-from .operators import NOISE_OT_generate_perlin, NOISE_OT_generate_worley, NOISE_OT_add_to_shader
+from .operators import NOISE_OT_generate_perlin, NOISE_OT_generate_voronoii, NOISE_OT_add_to_shader
 from .panels import NOISE_PT_main_panel
 
 
 classes = (
     NOISE_OT_generate_perlin,
-    NOISE_OT_generate_worley,
+    NOISE_OT_generate_voronoii,
     NOISE_OT_add_to_shader,
     NOISE_PT_main_panel,
 )
@@ -80,7 +80,7 @@ def register():
         name="Noise Type",
         items=[
             ('PERLIN', "Perlin", "Generate Perlin noise"),
-            ('WORLEY', "Worley", "Generate Worley noise"),
+            ('VORONOII', Voronoioi", "GeneratVoronoinoi noise"),
         ],
         default='PERLIN'
     )

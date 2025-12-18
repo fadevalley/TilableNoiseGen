@@ -1,7 +1,7 @@
 import bpy
 import math
 import numpy as np
-from .noise_samplers import PerlinSampler2D, WorleySampler2D
+from .noise_samplers import PerlinSampler2D, VoronoiSampler2D
 
 def create_perlin_noise_image(name, width, height, period, randseed, overwrite, correct_aspect, use_color, use_alpha, absolute):
     # Image handling
@@ -172,7 +172,7 @@ def create_turbulence_image(name, width, height, period, randseed, depth, lacuna
 
     return img
 
-def create_worley_noise_image(name, width, height, frequency, randseed, return_type, use_color, use_alpha, overwrite, correct_aspect, smoothness=0.0, randomness=1.0, minkowski_exponent=3.0):
+def create_voronoi_noise_image(name, width, height, frequency, randseed, return_type, use_color, use_alpha, overwrite, correct_aspect, smoothness=0.0, randomness=1.0, minkowski_exponent=3.0):
     # Image handling
     if overwrite and name in bpy.data.images:
         old_img = bpy.data.images[name]
@@ -198,7 +198,7 @@ def create_worley_noise_image(name, width, height, frequency, randseed, return_t
     y_coords = i / height
     
     # Create sampler with appropriate grid size
-    sampler = WorleySampler2D(
+    sampler = VoronoiSampler2D(
         math.ceil(frequency),
         math.ceil(frequency),
         randseed,
@@ -239,7 +239,7 @@ def create_worley_noise_image(name, width, height, frequency, randseed, return_t
         
         if num_channels > 3:
             # Generate alpha channel (if requested)
-            sampler_alpha = WorleySampler2D(
+            sampler_alpha = VoronoiSampler2D(
                 math.ceil(frequency),
                 math.ceil(frequency),
                 randseed + 10000  # Different seed for alpha
@@ -253,7 +253,7 @@ def create_worley_noise_image(name, width, height, frequency, randseed, return_t
         
         # If alpha channel is requested, generate it with a different seed
         if num_channels > 1:
-            sampler_alpha = WorleySampler2D(
+            sampler_alpha = VoronoiSampler2D(
                 math.ceil(frequency),
                 math.ceil(frequency),
                 randseed + 10000  # Different seed for alpha
@@ -293,7 +293,7 @@ def create_worley_noise_image(name, width, height, frequency, randseed, return_t
 
     # Store parameters in metadata
     img["noise_params"] = {
-        "type": "worley",
+        "type": "voronoi",
         "width": width,
         "height": height,
         "frequency": frequency,
